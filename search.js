@@ -102,53 +102,85 @@ const decimalSearch = (ddIndex, ddTitle, library, start = 0, end = library.lengt
 // console.log(decimalSearch('005.133', 'Mike Cowlishaw: The REXX Language', library));
 // console.log(decimalSearch('005.2762', 'Mike Cowlishaw: The REXX Language', library));
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Exercise 4
-// class BinarySearchTree{
-//   constructor(key=null,value=null,parent=null){
-//     this.key = key;
-//     this.value = value;
-//     this.parent = parent;
-//     this.left = null;
-//     this.right = null;
-//   }
-//
-//   insert(key, value){
-//     if(this.key === null){
-//       this.key = key;
-//       this.value = value;
-//     }
-//     else if(key < this.key){
-//       if(this.left === null){
-//         this.left = new BinarySearchTree(key, value, this);
-//       }
-//       else{
-//         this.left.insert(key,value);
-//       }
-//     }
-//     else{
-//       if(this.right === null){
-//         this.right = new BinarySearchTree(key, value, this);
-//       }
-//       else{
-//         this.right.insert(key,value);
-//       }
-//     }
-//   }
-// }
-//
-// const bsData = '25 15 50 10 24 35 70 4 12 18 31 44 66 90 22';
-// const splitBsData = bsData.split(' ');
-// const mapBsData = splitBsData.map(num => parseInt(num));
-// console.log(mapBsData);
+class BinarySearchTree{
+  constructor(key=null,value=null,parent=null){
+    this.key = key;
+    this.value = value;
+    this.parent = parent;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(key, value){
+    if(this.key === null){
+      this.key = key;
+      this.value = value;
+    }
+    else if(key < this.key){
+      if(this.left === null){
+        this.left = new BinarySearchTree(key, value, this);
+      }
+      else{
+        this.left.insert(key,value);
+      }
+    }
+    else{
+      if(this.right === null){
+        this.right = new BinarySearchTree(key, value, this);
+      }
+      else{
+        this.right.insert(key,value);
+      }
+    }
+  }
+}
+
+function preOrder(node, arr=[]){
+
+  arr.push(node.key);
+  if(node.left){
+    preOrder(node.left, arr);
+  }
+
+  if(node.right){
+    preOrder(node.right, arr);
+  }
+  return arr;
+}
+
+function inOrder(node, arr = []){
+  if(node.left){
+    inOrder(node.left, arr);
+  }
+
+  arr.push(node.key);
+
+  if(node.right){
+    inOrder(node.right, arr);
+  }
+  return arr;
+}
+
+function postOrder(node, arr = []){
+  if(node.left){
+    postOrder(node.left, arr);
+  }
+
+  if(node.right){
+    postOrder(node.right, arr);
+  }
+
+  arr.push(node.key);
+  return arr;
+}
+
+const bst = new BinarySearchTree();
+const bsData = '25 15 50 10 22 24 35 70 4 12 18 31 44 66 90';
+const splitBsData = bsData.split(' ');
+const mapBsData = splitBsData.map(num => parseInt(num));
+mapBsData.map(el=>bst.insert(el,''));
+console.log(preOrder(bst));
+console.log(inOrder(bst));
+console.log(postOrder(bst));
+
