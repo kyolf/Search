@@ -207,3 +207,67 @@ const maxProfit = (sharesArray, dayOfWeek) => {
 // maxProfit(sharePricesArray, 4);
 // maxProfit(sharePricesArray, 6);
 // slice the array from the day, sort that, return last index
+
+
+//Exercise 6
+const floors = [];
+for(let i = 0; i <= 100; i++){
+  floors.push(i);
+}
+
+function isEggBroken(floors, eggs = 2, start = 0, end = floors.length){
+  const index = Math.floor((start + end)/2);
+  const item = floors[index];
+  console.log(item,eggs);
+  if(eggs < 1){
+    return false;
+  }
+
+  if(item <= 15){
+    return true;
+  }
+  else{
+    return isEggBroken(floors, --eggs, start, index -1);
+  }
+}
+
+function isEggBroken2(floors, eggs=2, breakEggIndex = 99){
+  let tries = 0;  
+  // for(let i = 0; i < floors.length; i= i+10){
+  //   tries++;
+  //   console.log('tries:', tries, i);
+  //   if(floors[i] >= breakEggIndex){
+  //     eggs--;
+  //     for(let j = i-9; j < i; j++){
+  //       tries++;
+  //       console.log('tries inner', tries, j);
+  //       if(floors[j] === breakEggIndex){
+  //         eggs--;
+  //         break;
+  //       }
+  //     }
+  //     break;
+  //   }
+  // }
+
+  for(let i = 1 ; i < floors.length; i = i*2){
+    tries++;
+    console.log('tries: ', tries, i);
+    if(floors[i] >= breakEggIndex){
+      egg--;
+      
+      for(let j = (i/2); j < i; j++){
+        tries++;
+        console.log('tries inner:', tries, j);
+        if(floors[j] === breakEggIndex){
+          eggs--;
+          break;
+        }
+      }
+      break;
+    }
+  }
+  return tries;
+}
+// console.log(isEggBroken(floors));
+console.log(isEggBroken2(floors));
