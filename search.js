@@ -180,7 +180,30 @@ const bsData = '25 15 50 10 22 24 35 70 4 12 18 31 44 66 90';
 const splitBsData = bsData.split(' ');
 const mapBsData = splitBsData.map(num => parseInt(num));
 mapBsData.map(el=>bst.insert(el,''));
-console.log(preOrder(bst));
-console.log(inOrder(bst));
-console.log(postOrder(bst));
+// console.log(preOrder(bst));
+// console.log(inOrder(bst));
+// console.log(postOrder(bst));
 
+// Exercise 5
+const sharePricesArray = [128, 97, 121, 123, 98, 97, 105];
+
+const maxProfit = (sharesArray, dayOfWeek) => {
+  const sharesTree = new BinarySearchTree();
+  const remainder = sharesArray.slice(dayOfWeek);
+  remainder.map((num, index) => sharesTree.insert(num, index));
+
+  const myPrice = sharesTree.key;
+
+  let node = sharesTree;
+  while (node.left !== null) {
+    node = node.left;
+  }
+
+  console.log(`You purchased shares at ${myPrice}. You're maximum profit is ${myPrice - node.key} per share from selling on day ${node.value}`);
+};
+
+// maxProfit(sharePricesArray, 0);
+// maxProfit(sharePricesArray, 2);
+// maxProfit(sharePricesArray, 4);
+// maxProfit(sharePricesArray, 6);
+// slice the array from the day, sort that, return last index
