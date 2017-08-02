@@ -15,3 +15,28 @@ const indexOf = (value, list) => {
   }
   return -1;
 };
+
+
+//Exercise 2
+data.sort((a,b)=>a-b);
+console.log(data);
+const binarySearch = (value, list, start, end) => {
+  if(start > end){
+    return -1;
+  }
+
+  const lastHalfIndex = Math.floor((start + end)/2);
+  const item = list[lastHalfIndex];
+
+  if(value === item){
+    return lastHalfIndex;
+  }
+  else if(value < item){
+    return binarySearch(value, list, start, lastHalfIndex - 1);
+  }
+  else{
+    return binarySearch(value, list, lastHalfIndex + 1, end);
+  } 
+};
+
+console.log(binarySearch(98, data, 0 , data.length));
